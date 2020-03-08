@@ -27,13 +27,20 @@ async function main() {
                 await delay(5000);
             }
         }
+
+        console.log('BEFORE STARTING THE DRIVER');
+
         const driver = await new Builder()
             .forBrowser('chrome')
             .usingServer('http://selenium:4444/wd/hub')
             .setChromeOptions(options)
             .build();
 
+        console.log('DRIVER STARTED')
+
         const companies = await readDataFromS3(bundleId, 'companies.json');
+
+        console.log('COMPANIES', companies.length)
 
         for (let i=0; i<1000; i++) {
             await driver.get(`https://www.indeed.co.uk/companies/search?from=discovery-cmp-front-door&q=${companies[i].organisationName.replace(/ /g,'+')}`);

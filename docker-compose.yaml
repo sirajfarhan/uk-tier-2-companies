@@ -7,6 +7,8 @@ services:
   luminati:
     image: 'luminati/luminati-proxy'
     command: 'luminati'
+    ports:
+    - 8000:22999
 
   proxy_setup:
     build: 'https://github.com/siraj-ai/luminati_proxy_setup.git'
