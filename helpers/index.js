@@ -154,7 +154,7 @@ async function readDataFromS3(bucketName, fileName, json=true) {
         };
         s3.getObject(params, (err, data) => {
             if (err) return reject(err);
-            return resolve(json ? data.toString() : JSON.parse(data.toString()));
+            return resolve(json ? JSON.parse(data.Body.toString()) : data.Body.toString());
         });
     });
 }

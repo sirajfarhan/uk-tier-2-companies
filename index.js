@@ -37,7 +37,7 @@ async function main() {
 
         const companies = await readDataFromS3(bundleId, 'companies.json');
 
-        console.log('COMPANIES', companies.length);
+        console.log('COMPANIES', companies);
 
         for (let i=0; i<1000; i++) {
             await driver.get(`https://www.indeed.co.uk/companies/search?from=discovery-cmp-front-door&q=${companies[i].organisationName.replace(/ /g,'+')}`);
