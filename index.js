@@ -1,7 +1,6 @@
 const { Builder } = require('selenium-webdriver');
 const { Options } = require('selenium-webdriver/chrome');
 const delay = require('delay');
-const request = require('request-promise').defaults({ proxy: 'http://luminati:24000' });
 
 const { readDataFromS3, writeDataToS3, createS3Bucket } = require('./helpers');
 
@@ -11,32 +10,30 @@ const proxyAddress = 'luminati:24000';
 
 const options = new Options()
     .headless()
-    .addArguments(`--proxy-server=http://${proxyAddress}`)
     .windowSize({
         width: 1024,
         height: 768
     });
 
 async function main() {
-        while (true) {
-            try {
-                await request('http://indeed.co.uk');
-                break;
-            } catch (e) {
-                console.log('ERROR', e);
-                await delay(5000);
-            }
+
+    let driver = null;
+
+    while (true) {
+        try {
+            driver = await new Builder()
+                .forBrowser('chrome')
+                .usingServer('http://selenium:4444/wd/hub')
+                .setChromeOptions(options)
+                .build();
+            break;
+        } catch (e) {
+            console.log('ERROR', e);
+            await delay(5000);
         }
+    }
 
-        console.log('BEFORE STARTING THE DRIVER');
-
-        const driver = await new Builder()
-            .forBrowser('chrome')
-            .usingServer('http://selenium:4444/wd/hub')
-            .setChromeOptions(options)
-            .build();
-
-        console.log('DRIVER STARTED')
+        console.log('DRIVER STARTED');
 
         const companies = await readDataFromS3(bundleId, 'companies.json');
 
