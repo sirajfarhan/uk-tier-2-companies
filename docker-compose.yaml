@@ -9,13 +9,13 @@ services:
     command: 'luminati'
 
   proxy_setup:
-    build: 'git@github.com:siraj-ai/luminati_proxy_setup.git'
+    build: 'https://github.com/siraj-ai/luminati_proxy_setup.git'
     command: 'node index.js'
     depends_on:
       - proxy_manager
 
   app:
-    build: 'git@github.com:siraj-ai/uk-tier-2-companies.git'
+    build: 'https://github.com/siraj-ai/uk-tier-2-companies.git'
     command: 'node index.js'
     depends_on:
       - selenium
