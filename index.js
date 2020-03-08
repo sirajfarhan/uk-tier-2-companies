@@ -20,7 +20,7 @@ const options = new Options()
 async function main() {
         while (true) {
             try {
-                await request('https://indeed.co.uk');
+                await request('http://indeed.co.uk');
                 break;
             } catch (e) {
                 console.log('ERROR', e);
@@ -40,10 +40,10 @@ async function main() {
 
         const companies = await readDataFromS3(bundleId, 'companies.json');
 
-        console.log('COMPANIES', companies.length)
+        console.log('COMPANIES', companies.length);
 
         for (let i=0; i<1000; i++) {
-            await driver.get(`https://www.indeed.co.uk/companies/search?from=discovery-cmp-front-door&q=${companies[i].organisationName.replace(/ /g,'+')}`);
+            await driver.get(`http://www.indeed.co.uk/companies/search?from=discovery-cmp-front-door&q=${companies[i].organisationName.replace(/ /g,'+')}`);
 
             const indeedUrl = await driver.executeScript(`
                const link = document.querySelector('.cmp-company-tile-blue-name > a');
@@ -53,7 +53,7 @@ async function main() {
 
             companies[i].indeedUrl = indeedUrl;
 
-            await driver.get(indeedUrl + '/jobs');
+            await driver.get(indeedUrl.replace('https://','http://') + '/jobs');
             const noOpenings = await driver.executeScript(`
                 return document.body.innerText.includes('There are currently no open jobs')
             `);
