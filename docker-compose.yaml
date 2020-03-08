@@ -23,5 +23,4 @@ services:
       - luminati
       - selenium
     depends_on:
-      - luminati
-      - selenium
+      - proxy_setup
