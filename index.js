@@ -39,7 +39,7 @@ async function main() {
 
         console.log('COMPANIES', companies.length);
 
-        for (let i=0; i<1000; i++) {
+        for (let i=900; i<companies.length; i++) {
             await driver.get(`https://www.indeed.co.uk/companies/search?from=discovery-cmp-front-door&q=${companies[i].organisationName.replace(/ /g,'+')}`);
 
             const indeedUrl = await driver.executeScript(`
@@ -71,9 +71,8 @@ async function main() {
             `);
             companies[i] = { ...companies[i], noOpenings, jobs };
 
-            console.log('PROGRESS', i);
-
             if(i % 50 === 0) {
+                console.log('PROGRESS', i);
                 await writeDataToS3(bundleId,'companies.json', companies);
             }
         }
