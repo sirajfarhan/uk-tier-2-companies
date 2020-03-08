@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1e00fc14-5c7a-4fc8-a6ad-0ee916b1d44d" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectId" id="1Ykb4XNjQ6VD71UPXQRuK8BkAkJ" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1e00fc14-5c7a-4fc8-a6ad-0ee916b1d44d" name="Default Changelist" comment="" />
+      <created>1583489349313</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1583489349313</updated>
+      <workItem from="1583489356879" duration="5031000" />
+      <workItem from="1583560483580" duration="296000" />
+      <workItem from="1583584251981" duration="5379000" />
+      <workItem from="1583661571358" duration="8000" />
+      <workItem from="1583662275052" duration="3203000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="457" y="237" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1583667028779">
+      <screen x="0" y="23" width="1440" height="808" />
+    </state>
+    <state x="457" y="237" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.808@0.23.1440.808" timestamp="1583667028779" />
+    <state x="229" y="66" key="SettingsEditor" timestamp="1583655497103">
+      <screen x="0" y="23" width="1440" height="808" />
+    </state>
+    <state x="229" y="66" key="SettingsEditor/0.23.1440.808@0.23.1440.808" timestamp="1583655497103" />
+    <state x="413" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1583661577484">
+      <screen x="0" y="23" width="1440" height="808" />
+    </state>
+    <state x="413" y="259" key="com.intellij.ide.util.TipDialog/0.23.1440.808@0.23.1440.808" timestamp="1583661577484" />
+  </component>
+</project>

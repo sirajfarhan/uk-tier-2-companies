@@ -1,0 +1,20 @@
+version: "3"
+
+services:
+  selenium:
+    image: 'selenium/standalone-chrome'
+
+  proxy_manager:
+    image: 'luminati/luminati-proxy'
+    command: 'luminati'
+
+  proxy_setup:
+    build: 'git@github.com:siraj-ai/luminati_proxy_setup.git'
+    depends_on:
+      - proxy_manager
+
+  app:
+    build:
+    depends_on:
+      - selenium
+      - proxy_setup
