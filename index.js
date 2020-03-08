@@ -23,6 +23,7 @@ async function main() {
                 await request('https://indeed.co.uk');
                 break;
             } catch (e) {
+                console.log('ERROR', e);
                 await delay(5000);
             }
         }
