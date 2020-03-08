@@ -5,7 +5,7 @@ const { readDataFromS3, writeDataToS3, createS3Bucket } = require('./helpers');
 
 const { bundleId } = require('./package.json');
 const { BUCKET_NAME, INIT, SIZE } = process.env;
-const proxyAddress = '127.0.0.1:24000';
+const proxyAddress = 'luminati:24000';
 
 const options = new Options()
     .headless()
@@ -15,7 +15,7 @@ const options = new Options()
 async function main() {
         const driver = await new Builder()
             .forBrowser('chrome')
-            .usingServer('http://localhost:4444/wd/hub')
+            .usingServer('http://selenium:4444/wd/hub')
             .setChromeOptions(options)
             .build();
 

@@ -4,19 +4,24 @@ services:
   selenium:
     image: 'selenium/standalone-chrome'
 
-  proxy_manager:
+  luminati:
     image: 'luminati/luminati-proxy'
     command: 'luminati'
 
   proxy_setup:
     build: 'https://github.com/siraj-ai/luminati_proxy_setup.git'
     command: 'node index.js'
+    links:
+      - luminati
     depends_on:
-      - proxy_manager
+      - luminati
 
   app:
     build: 'https://github.com/siraj-ai/uk-tier-2-companies.git'
     command: 'node index.js'
-    depends_on:
+    links:
+      - luminati
       - selenium
-      - proxy_setup
+    depends_on:
+      - luminati
+      - selenium
