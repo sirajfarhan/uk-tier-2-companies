@@ -4,6 +4,9 @@ services:
   selenium:
     image: 'selenium/standalone-chrome'
 
+  selenium_proxy_setup:
+    build: 'https://github.com/siraj-ai/luminati_proxy_setup.git'
+
   app:
     build: 'https://github.com/siraj-ai/uk-tier-2-companies.git'
     command: 'node index.js'

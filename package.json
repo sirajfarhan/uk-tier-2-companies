@@ -12,6 +12,7 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
     "selenium-webdriver": "^4.0.0-alpha.5",
-    "string-similarity": "^4.0.1"
+    "string-similarity": "^4.0.1",
+    "timeago-reverse": "^1.0.10"
   }
 }
