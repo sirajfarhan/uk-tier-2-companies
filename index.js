@@ -19,27 +19,33 @@ const options = new Options()
 async function main() {
     let driver = null;
 
+
     while (true) {
+
         try {
+            console.log('TRYING TO CONNECT WITH SELENIUM');
             const { value: { ready } } = await request({
                 uri: 'http://selenium:4444/wd/hub/status',
                 json: true,
             });
+            console.log('READY', ready);
             if(ready) break;
         } catch (e) {
-
+            console.log('CAUGHT ERROR');
         }
         await delay(5000);
     }
 
     while (true) {
         try {
+            console.log('TRYING TO CONNECT WITH PROXY');
             await request({
                 uri: 'http://lumtest.com/myip.json',
                 json: true,
             });
             break;
         } catch (e) {
+            console.log('CAUGHT ERROR');
             await delay(5000);
         }
     }

@@ -5,15 +5,24 @@ services:
     image: 'selenium/standalone-chrome'
 
   luminati:
-    image: 'luminati'
+    image: 'luminati/luminati-proxy'
     command: 'luminati --ssl true'
+    ports:
+    - 22999:22999
 
   luminati_proxy_setup:
     image: 'sirajfarhan/luminati_proxy_setup'
+    command: 'node index.js'
+    environment:
+      URL: 'http://luminati:22999'
+      IDENTIFIER: 'hello@siraj.ai'
+      PASSWORD: 'Root@1234'
     links:
       - luminati
+      - selenium
     depends_on:
       - luminati
+      - selenium
 
   app:
     image: 'sirajfarhan/uk-tier-2-companies'
