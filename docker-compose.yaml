@@ -4,13 +4,23 @@ services:
   selenium:
     image: 'selenium/standalone-chrome'
 
-  selenium_proxy_setup:
-    build: 'https://github.com/siraj-ai/luminati_proxy_setup.git'
+  luminati:
+    image: 'luminati'
+    command: 'luminati --ssl true'
+
+  luminati_proxy_setup:
+    image: 'sirajfarhan/luminati_proxy_setup'
+    links:
+      - luminati
+    depends_on:
+      - luminati
 
   app:
-    build: 'https://github.com/siraj-ai/uk-tier-2-companies.git'
+    image: 'sirajfarhan/uk-tier-2-companies'
     command: 'node index.js'
     links:
       - selenium
+      - luminati
     depends_on:
       - selenium
+      - luminati

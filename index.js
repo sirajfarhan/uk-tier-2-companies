@@ -1,6 +1,7 @@
 const { Builder } = require('selenium-webdriver');
 const { Options } = require('selenium-webdriver/chrome');
 const delay = require('delay');
+const request = require('request-promise').defaults({ proxyAddress: 'luminati:24000' });
 
 const { readDataFromS3, writeDataToS3, createS3Bucket } = require('./helpers');
 
@@ -16,33 +17,52 @@ const options = new Options()
     });
 
 async function main() {
-
     let driver = null;
 
     while (true) {
         try {
-            driver = await new Builder()
-                .forBrowser('chrome')
-                .usingServer('http://selenium:4444/wd/hub')
-                .setChromeOptions(options)
-                .build();
+            const { value: { ready } } = await request({
+                uri: 'http://selenium:4444/wd/hub/status',
+                json: true,
+            });
+            if(ready) break;
+        } catch (e) {
+
+        }
+        await delay(5000);
+    }
+
+    while (true) {
+        try {
+            await request({
+                uri: 'http://lumtest.com/myip.json',
+                json: true,
+            });
             break;
         } catch (e) {
-            console.log('ERROR', e);
             await delay(5000);
         }
     }
 
-    const companies = await readDataFromS3(bundleId, 'companies.json');
+    console.log('EVERYTHING IS READY');
 
-    for (let i = 0; i < companies.length; i++) {
+    // const companies = await readDataFromS3(bundleId, 'companies.json');
 
-        await driver.get(`https://www.indeed.co.uk/companies/search?from=discovery-cmp-front-door&q=${companies[i].organisationName.replace(/ /g, '+')}`);
+    for (let i = 0; i < 10; i++) {
+        const { ip } = await request({
+            uri: 'http://lumtest.com/myip.json',
+            json: true,
+        });
 
-        if (i % 50 === 0) {
+        console.log('IP', ip);
+        await delay(5000);
+
+        // await driver.get(`https://www.indeed.co.uk/companies/search?from=discovery-cmp-front-door&q=${companies[i].organisationName.replace(/ /g, '+')}`);
+
+        // if (i % 50 === 0) {
             // console.log('PROGRESS', i);
             // await writeDataToS3(bundleId,'companies.json', companies);
-        }
+        // }
     }
     // await writeDataToS3(bundleId,'companies.json', companies);
 }

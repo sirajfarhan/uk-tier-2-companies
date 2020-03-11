@@ -174,4 +174,5 @@ module.exports = {
     readDataFromS3,
     writeDataToS3,
     createS3Bucket,
-}
+};
+
