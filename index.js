@@ -11,6 +11,8 @@ const { BUCKET_NAME, INIT, SIZE } = process.env;
 
 const options = new Options()
     .headless()
+    .addArguments('--disable-dev-shm-usage')
+    .addArguments('--no-sandbox')
     .windowSize({
         width: 1024,
         height: 768
