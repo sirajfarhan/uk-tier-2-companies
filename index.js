@@ -41,18 +41,22 @@ async function main() {
     const companies = await readDataFromS3(bundleId, 'companies.json');
 
     for (let i = 0; i < companies.length; i++) {
-        const jobs = companies[i].jobs;
-        if (jobs && jobs.length > 0) {
-            const website = companies[i].website;
-            if(website) {
-                await driver.get(website);
-                const contactInfo = await extractContactInfo(driver);
-                companies[i] = {...companies[i], ...contactInfo};
+        try {
+            const jobs = companies[i].jobs;
+            if (jobs && jobs.length > 0) {
+                const website = companies[i].website;
+                if(website) {
+                    await driver.get(website);
+                    const contactInfo = await extractContactInfo(driver);
+                    companies[i] = {...companies[i], ...contactInfo};
+                }
             }
-        }
-        if(i % 100 === 0) {
-            console.log('PROGRESS', i);
-            await writeDataToS3(bundleId, 'companies.json', companies);
+            if(i % 100 === 0) {
+                console.log('PROGRESS', i);
+                await writeDataToS3(bundleId, 'companies.json', companies);
+            }
+        } catch (e) {
+
         }
     }
     await writeDataToS3(bundleId,'companies.json', companies);
