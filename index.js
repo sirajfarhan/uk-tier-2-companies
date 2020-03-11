@@ -17,8 +17,6 @@ const options = new Options()
     });
 
 async function main() {
-    let driver = null;
-
     while (true) {
         try {
             console.log('TRYING TO CONNECT WITH SELENIUM');
@@ -33,6 +31,12 @@ async function main() {
         }
         await delay(5000);
     }
+
+    const driver = await new Builder()
+        .forBrowser('chrome')
+        .usingServer('http://selenium:4444/wd/hub')
+        .setChromeOptions(options)
+        .build();
 
     const companies = await readDataFromS3(bundleId, 'companies.json');
 
