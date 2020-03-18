@@ -44,15 +44,17 @@ async function main() {
     const companies = await readDataFromS3(bundleId, 'companies.json');
 
     for (let i = 0; i < companies.length; i++) {
-        await driver.get(companies[i].indeedUrl);
-        const { jobs } = await getJobsFromIndeed(driver);
-        companies[i].jobs = jobs;
-        if(typeof companies[i].noOpenings !== 'undefined') {
-            delete companies[i].noOpenings;
-        }
-        if(i % 100 === 0) {
-            await writeDataToS3(bundleId,'companies.json', companies);
-            console.log('PROGRESS', i);
+        if(companies[i].indeedUrl) {
+            await driver.get(companies[i].indeedUrl);
+            const { jobs } = await getJobsFromIndeed(driver);
+            companies[i].jobs = jobs;
+            if(typeof companies[i].noOpenings !== 'undefined') {
+                delete companies[i].noOpenings;
+            }
+            if(i % 100 === 0) {
+                await writeDataToS3(bundleId,'companies.json', companies);
+                console.log('PROGRESS', i);
+            }
         }
     }
     await writeDataToS3(bundleId,'companies.json', companies);
