@@ -1,8 +1,9 @@
+const timeAgoReverse = require('timeago-reverse');
+
 async function getJobsFromIndeed(driver) {
-    const noOpenings = await driver.executeScript(`
-       return document.body.innerText.includes('There are currently no open jobs')
-    `);
-    const jobs = await driver.executeScript(`
+    let jobs = [];
+    try {
+        jobs = await driver.executeScript(`
                 const jobListSection = document.querySelector('.cmp-JobList-jobList');
                 let jobs = []
                 if(jobListSection) {
@@ -16,9 +17,19 @@ async function getJobsFromIndeed(driver) {
                     })
                 }
                 return jobs
-    `);
+            `);
 
-    return { noOpenings, jobs };
+        jobs = jobs.map(job => {
+            if(job.time) {
+                job.time = timeAgoReverse.parse(job.time);
+            }
+            return job;
+        });
+    } catch (e) {
+
+    }
+    
+    return { jobs };
 }
 
 module.exports = { getJobsFromIndeed };

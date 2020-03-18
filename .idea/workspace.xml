@@ -3,11 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="1e00fc14-5c7a-4fc8-a6ad-0ee916b1d44d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/helpers/selenium/indeed.js" beforeDir="false" afterPath="$PROJECT_DIR$/helpers/selenium/indeed.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -102,7 +109,9 @@
       <workItem from="1583913618157" duration="184000" />
       <workItem from="1583913832438" duration="18000" />
       <workItem from="1583913859009" duration="938000" />
-      <workItem from="1583916474266" duration="2816000" />
+      <workItem from="1583916474266" duration="4215000" />
+      <workItem from="1584444179909" duration="13000" />
+      <workItem from="1584531133904" duration="611000" />
     </task>
     <servers />
   </component>

@@ -5,6 +5,7 @@ const request = require('request-promise');
 
 const { readDataFromS3, writeDataToS3, createS3Bucket } = require('./helpers');
 const { extractContactInfo } = require('./helpers/selenium/website');
+const { getJobsFromIndeed } = require('./helpers/selenium/indeed');
 
 const { bundleId } = require('./package.json');
 const { BUCKET_NAME, INIT, SIZE } = process.env;
@@ -43,22 +44,15 @@ async function main() {
     const companies = await readDataFromS3(bundleId, 'companies.json');
 
     for (let i = 0; i < companies.length; i++) {
-        try {
-            const jobs = companies[i].jobs;
-            if (jobs && jobs.length > 0) {
-                const website = companies[i].website;
-                if(website) {
-                    await driver.get(website);
-                    const contactInfo = await extractContactInfo(driver);
-                    companies[i] = {...companies[i], ...contactInfo};
-                }
-            }
-            if(i % 100 === 0) {
-                console.log('PROGRESS', i);
-                await writeDataToS3(bundleId, 'companies.json', companies);
-            }
-        } catch (e) {
-
+        await driver.get(companies[i].indeedUrl);
+        const { jobs } = await getJobsFromIndeed(driver);
+        companies[i].jobs = jobs;
+        if(typeof companies[i].noOpenings !== 'undefined') {
+            delete companies[i].noOpenings;
+        }
+        if(i % 100 === 0) {
+            await writeDataToS3(bundleId,'companies.json', companies);
+            console.log('PROGRESS', i);
         }
     }
     await writeDataToS3(bundleId,'companies.json', companies);
