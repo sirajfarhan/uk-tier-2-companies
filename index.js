@@ -45,7 +45,7 @@ async function main() {
 
     for (let i = 0; i < companies.length; i++) {
         if(companies[i].indeedUrl) {
-            await driver.get(companies[i].indeedUrl);
+            await driver.get(companies[i].indeedUrl + '/jobs');
             const { jobs } = await getJobsFromIndeed(driver);
             companies[i].jobs = jobs;
             if(typeof companies[i].noOpenings !== 'undefined') {
